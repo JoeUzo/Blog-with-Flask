@@ -122,7 +122,7 @@ def register():
     my_form = RegisterForm()
     if my_form.validate_on_submit():
         user = User()
-        user.email = my_form.email.data
+        user.email = my_form.email.data.lower()
         user.name = my_form.name.data
         password = my_form.password.data
 
@@ -150,7 +150,7 @@ def register():
 def login():
     my_form = LoginForm()
     if my_form.validate_on_submit():
-        user = User.query.filter_by(email=my_form.email.data).first()
+        user = User.query.filter_by(email=my_form.email.data.lower()).first()
         if not user or not check_password_hash(user.password, my_form.password.data):
             flash("No user found with that email, or password invalid.")
             return redirect(url_for('login'))
