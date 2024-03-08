@@ -59,7 +59,7 @@
 <!--            <a class="nav-link" href="">{{ current_user.name }} <i class="fas fa-user fa-lg"></i></a>-->
 <!--          </li>-->
           <li class="nav-item">
-            <a class="nav-link" href=""><span class="commenterImage"><img src="{{ current_user.email | gravatar }}"/></span></a>
+            <a class="nav-link" href=""><span class="commenterImage"><img src="{{ current_user.gravatar }}"/><span class="username-tooltip">{{ current_user.name }}</span></span></a>
           </li>
         {% endif %}
         </ul>

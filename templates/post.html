@@ -46,7 +46,7 @@
                         {% for comment in post.post_comment %}
                         <li>
                             <div class="commenterImage">
-                                <img src="{{ comment.user.email | gravatar }}"/>
+                                <img src="{{ comment.user.gravatar }}"/>
                             </div>
                             <div class="commentText">
                                 <span class="date sub-text">{{ comment.user.name }}</span>

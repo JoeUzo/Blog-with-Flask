@@ -4,16 +4,14 @@ from flask_ckeditor import CKEditor
 from datetime import date
 from werkzeug.security import generate_password_hash, check_password_hash
 from flask_sqlalchemy import SQLAlchemy
-from sqlalchemy.orm import relationship
 from flask_login import UserMixin, login_user, LoginManager, login_required, current_user, logout_user
 from forms import CreatePostForm, RegisterForm, LoginForm, CommentForm
-from flask_gravatar import Gravatar
+from libgravatar import Gravatar
 from functools import wraps
 from random import randint
 from mail import Mail
 from dotenv import load_dotenv
 import os
-
 
 load_dotenv()
 
@@ -26,14 +24,7 @@ Bootstrap(app)
 app.config['SQLALCHEMY_DATABASE_URI'] = os.getenv("DATABASE_URL")
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 db = SQLAlchemy(app)
-gravatar = Gravatar(app,
-                    size=100,
-                    rating='g',
-                    default='retro',
-                    force_default=False,
-                    force_lower=False,
-                    use_ssl=False,
-                    base_url=None)
+
 
 # LOGIN MANAGER STUFF
 login_manager = LoginManager()
@@ -55,6 +46,7 @@ class User(UserMixin, db.Model):
     email = db.Column(db.String(100), unique=True)
     password = db.Column(db.String(500))
     name = db.Column(db.String(1000))
+    gravatar = db.Column(db.String(1000))
 
     # One-to-Many relationship with Blogpost() - Parent.
     post = db.relationship('BlogPost', back_populates='user')
@@ -124,6 +116,8 @@ def register():
         user = User()
         user.email = my_form.email.data.lower()
         user.name = my_form.name.data
+        user.gravatar = Gravatar(my_form.email.data.lower()).get_image(size=520, default='robohash')
+
         password = my_form.password.data
 
         if user.query.filter_by(email=user.email).first():
@@ -293,4 +287,4 @@ def receive_data():
 
 
 if __name__ == "__main__":
-    app.run()
+    app.run(debug=True)
