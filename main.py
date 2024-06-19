@@ -115,7 +115,7 @@ def register():
     if my_form.validate_on_submit():
         user = User()
         user.email = my_form.email.data.lower()
-        user.name = my_form.name.data
+        user.name = my_form.username.data.title()
         user.gravatar = Gravatar(my_form.email.data.lower()).get_image(size=520, default='robohash')
 
         password = my_form.password.data
@@ -142,17 +142,19 @@ def register():
 
 @app.route('/login', methods=['POST', 'GET'])
 def login():
-    my_form = LoginForm()
-    if my_form.validate_on_submit():
-        user = User.query.filter_by(email=my_form.email.data.lower()).first()
-        if not user or not check_password_hash(user.password, my_form.password.data):
-            flash("No user found with that email, or password invalid.")
+    form = LoginForm()
+    if form.validate_on_submit():
+        user = User.query.filter_by(name=form.name.data.title()).first()
+        if user is None:
+            user = User.query.filter_by(email=form.name.data.lower()).first()
+        if not user or not check_password_hash(user.password, form.password.data):
+            flash("No user found with that username, or password invalid.")
             return redirect(url_for('login'))
         else:
             login_user(user)
             return redirect(url_for('get_all_posts'))
 
-    return render_template("login.html", form=my_form)
+    return render_template("login.html", form=form)
 
 
 @app.route('/logout')
