@@ -1,0 +1,25 @@
+services:
+  web:
+    build: .
+    ports:
+      - "5000:5000"
+    depends_on:
+      - db
+    env_file:
+      - .env
+    volumes:
+      - .:/app
+    restart: always
+
+  db:
+    image: postgres:13
+    environment:
+      POSTGRES_DB: appdatabase
+      POSTGRES_USER: appuser
+      POSTGRES_PASSWORD: 5FVn#Vq!dLz$9P63(0R1
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    restart: always
+
+volumes:
+  postgres_data:
