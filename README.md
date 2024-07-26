@@ -8,12 +8,35 @@ The "Blog with Flask" project is a web application that allows users to create, 
 
 ## Installation Instructions
 
+### Using Docker
+
+1. **Pull the Docker Image:**
+   ```bash
+   docker pull joeuzo/flask-blog:latest
+   ```
+
+2. **Prepare the `.env` File:**
+   Create a `.env` file in your working directory with the following content:
+   ```makefile
+   SECRET_KEY=your_secret_key
+   DATABASE_URL=sqlite:///path/to/database.db  # Or your preferred database URL
+   EMAIL_KEY=your_email_app_key
+   EMAIL_ADDRESS=your_email@example.com
+   ```
+
+3. **Run the Docker Container:**
+   ```bash
+   docker run --env-file .env -p 5000:5000 joeuzo/flask-blog:latest
+   ```
+
+### Manual Installation
+
 1. **Clone the Repository:**
    ```bash
    git clone https://github.com/JoeUzo/Blog-with-Flask.git
    cd Blog-with-Flask
    ```
-   
+
 2. **Create a Virtual Environment:**
    ```bash
    python -m venv venv
@@ -70,6 +93,15 @@ Contributions are welcome! If you would like to contribute, please follow these 
 
 This project is licensed under the MIT License. See the [LICENSE](LICENSE) file for details.
 
+## Docker Image
 
+You can find the Docker image for this project on Docker Hub:
 
+[![Docker Image](https://img.shields.io/badge/Docker%20Hub-flask--blog-blue)](https://hub.docker.com/r/joeuzo/flask-blog)
 
+To run the Docker image:
+
+```sh
+docker pull joeuzo/flask-blog:latest
+docker run --env-file .env -p 5000:5000 joeuzo/flask-blog:latest
+```
