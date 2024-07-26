@@ -25,7 +25,7 @@ The "Blog with Flask" project is a web application that allows users to create, 
 
 1. **Pull the Docker Image:**
    ```bash
-   docker pull joeuzo/flask-blog:latest
+   docker pull joeuzo/flask-blog:tagname
    ```
 
 2. **Prepare the `.env` File:**
@@ -39,7 +39,7 @@ The "Blog with Flask" project is a web application that allows users to create, 
 
 3. **Run the Docker Container:**
    ```bash
-   docker run --env-file .env -p 5000:5000 joeuzo/flask-blog:latest
+   docker run --env-file .env -p 5000:5000 joeuzo/flask-blog:tagname
    ```
 
 ### Manual Installation
@@ -111,8 +111,8 @@ You can find the Docker image for this project on Docker Hub:
 To run the Docker image:
 
 ```sh
-docker pull joeuzo/flask-blog:latest
-docker run --env-file .env -p 5000:5000 joeuzo/flask-blog:latest
+docker pull joeuzo/flask-blog:tagname
+docker run --env-file .env -p 5000:5000 joeuzo/flask-blog:tagname
 ```
 
 ## License
