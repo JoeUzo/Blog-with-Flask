@@ -13,7 +13,7 @@ A simple blog application built using Python and Flask. This project demonstrate
 - [Contributing](#contributing)
 - [Docker Image](#docker-image)
 - [License](#license)
-- 
+  
 
 ## Project Overview
 
