@@ -120,8 +120,8 @@ def register():
 
         password = my_form.password.data
 
-        if user.query.filter_by(email=user.email).first():
-            flash(f"User {user.email} already exists!", 'info')
+        if user.query.filter_by(email=user.email).first() or user.query.filter_by(name=user.name.title()).first():
+            flash(f"Username or Email address already exists!", 'info')
             return redirect(url_for('register'))
 
         salt_length = randint(16, 32)
